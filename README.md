@@ -1,2 +1,2 @@
-# digital-hack-video-markup
-Digital-hack video markup
+# Хакатон "Цифровой проорыв"
+Кейс "Разметка видеоконтента"
