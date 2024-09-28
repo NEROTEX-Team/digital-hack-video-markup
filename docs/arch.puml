@@ -1,0 +1,50 @@
+@startuml Architecture
+title "Архитектура сервиса"
+
+actor User as user
+component "Frontend" as front
+component "BFF" as back
+queue "Processing\nTasks" as q
+cloud "S3" as s3
+database "PostgreSQL" as db
+
+component "Transcribtion\nService" as trans
+component "Sound Marking\nService" as sound_mark
+component "Symbol Recognition\nService" as symbol_rec
+component "Object Recognition\nService" as object_rec
+component "Scene Recognition\nService" as scene_rec
+component "PoI Recognition\nService" as poi_rec
+
+
+user -> front
+front <-> back
+back --> s3
+back --> q
+back --> db
+
+trans <--- q
+trans ---> db
+trans ---> s3
+
+sound_mark <--- q
+sound_mark ---> db
+sound_mark ---> s3
+
+symbol_rec <--- q
+symbol_rec ---> db
+symbol_rec ---> s3
+
+object_rec <--- q
+object_rec ---> db
+object_rec ---> s3
+
+scene_rec <--- q
+scene_rec ---> db
+scene_rec ---> s3
+
+poi_rec <--- q
+poi_rec ---> db
+poi_rec ---> s3
+
+
+@enduml
