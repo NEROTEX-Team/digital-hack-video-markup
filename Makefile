@@ -3,15 +3,15 @@ TEST_FOLDER_NAME = tests
 PYTHON_VERSION = 3.12
 
 test-ci: ##@Test Run tests with pytest and coverage in CI
-	.venv/bin/pytest ./$(TEST_FOLDER_NAME) --junitxml=./junit.xml --cov=./$(PROJECT_NAME) --cov-report=xml
+	pytest ./$(TEST_FOLDER_NAME) --junitxml=./junit.xml --cov=./$(PROJECT_NAME) --cov-report=xml
 
-lint-ci: ruff mypy ##@Linting Run all linters in CI
+lint-ci: ruff-ci mypy-ci ##@Linting Run all linters in CI
 
-ruff: ##@Linting Run ruff
-	.venv/bin/ruff check ./$(PROJECT_NAME)
+ruff-ci: ##@Linting Run ruff
+	ruff check ./$(PROJECT_NAME)
 
-mypy: ##@Linting Run mypy
-	.venv/bin/mypy --config-file ./pyproject.toml ./$(PROJECT_NAME)
+mypy-ci: ##@Linting Run mypy
+	mypy --config-file ./pyproject.toml ./$(PROJECT_NAME)
 
 develop: clean_dev ##@Develop Create virtualenv
 	python$(PYTHON_VERSION) -m venv .venv
