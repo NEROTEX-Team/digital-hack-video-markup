@@ -1,0 +1,15 @@
+@startuml Database
+enum VideoStatus {
+    - UPLOADED
+    - PREPROCESSING
+    - FINISHED
+    - FAILED
+}
+entity Video {
+    * id: UUID
+    * name: String[1024]
+    * s3_path: String[1024]
+    * video_status: VideoStatus
+}
+VideoStatus --> Video
+@enduml
